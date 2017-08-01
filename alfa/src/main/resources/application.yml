@@ -1,0 +1,43 @@
+spring:
+  cloud:
+     stream:
+        bindings:
+           input_alfa:
+              binder: kafka
+              destination: alfa_exchange
+              group: testgroup
+              contentType: application/json
+              consumer:
+                contentType: application/json
+           output_alfa:
+              binder: kafka
+              destination: beta_exchange
+              group: testgroup
+              contentType: application/json
+        kafka:
+           binder:
+              brokers: localhost:9092
+              zkNodes: localhost:2181
+              headers:
+                  - X-B3-TraceId
+                  - X-B3-SpanId
+                  - X-B3-Sampled
+                  - X-B3-ParentSpanId
+                  - X-Span-Name
+                  - X-Process-Id
+                  - spanId
+                  - spanSampled
+                  - spanProcessId
+                  - spanParentSpanId
+                  - spanTraceId
+                  - spanName
+                  - messageSent
+server:
+  port: 9001
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8716/eureka/
+  instance:
+    preferIpAddress: true

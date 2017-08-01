@@ -1,0 +1,13 @@
+server:
+  port: 9411
+spring:
+  application:
+    name: zipkin
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8716/eureka/
+    registry-fetch-interval-seconds: 15
