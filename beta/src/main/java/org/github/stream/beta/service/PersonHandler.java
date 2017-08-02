@@ -25,17 +25,17 @@ public class PersonHandler {
     @Autowired
     private Tracer tracer;
 
-
-    @NewSpan
+  //  @NewSpan(value = "person")
     @StreamListener(BetaListener.INPUT_SERVICE)
-    public void listenPerson(Message<String> person){
+    public void listenPerson(String person){
 
-    //    tracer.
+        Span span = tracer.getCurrentSpan();
+        System.out.println("Exportable:"+span.isExportable());
 
         //person.getHeaders().forEach((k,v)->System.out.println("Key:"+k));
 
-        LOG.info("SpanID:"+person.getHeaders().get("X-B3-SpanId"));
+//        LOG.info("SpanID:"+person.getHeaders().get("X-B3-SpanId"));
 
-        LOG.info("Person from dynamic:"+person.getPayload());
+        LOG.info("Person from dynamic:"+person);
     }
 }
